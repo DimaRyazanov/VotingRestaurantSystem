@@ -41,4 +41,26 @@ public class Restaurant extends AbstractNamedEntity {
     public void setMenus(Collection<Menu> menus) {
         this.menus = CollectionUtils.isEmpty(menus) ? Collections.EMPTY_LIST : List.copyOf(menus);
     }
+
+    public City getCity() {
+        return city;
+    }
+
+    public List<Menu> getMenus() {
+        return menus;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "city=" + city +
+                ", menus=" + menus +
+                ", name='" + name + '\'' +
+                ", id=" + id +
+                '}';
+    }
 }
