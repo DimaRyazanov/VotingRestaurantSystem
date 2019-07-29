@@ -2,20 +2,17 @@ package ru.votingsystem.graduation.model;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @Entity
 @Table(name = "menus", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id", "date"}, name = "menus_unique_restaurant_date_idx")})
 public class Menu extends AbstractBaseEntity {
 
-    @Column(name = "date", nullable = false)
+    @Column(name = "date", nullable = false, columnDefinition = "timestamp default now()")
     @NotNull
     private LocalDate date;
 
@@ -36,27 +33,17 @@ public class Menu extends AbstractBaseEntity {
     }
 
     public Menu(Menu m) {
-        this(m.id, m.date, m.restaurant, m.meals, m.votes);
+        this(m.id, m.date, m.restaurant);
     }
 
-    public Menu(@NotNull LocalDate date, @NotNull Restaurant restaurant, List<Meal> meals, List<Vote> votes) {
-        this(null, date, restaurant, meals, votes);
+    public Menu(@NotNull LocalDate date, @NotNull Restaurant restaurant) {
+        this(null, date, restaurant);
     }
 
-    public Menu(Integer id, @NotNull LocalDate date, @NotNull Restaurant restaurant, List<Meal> meals, List<Vote> votes) {
+    public Menu(Integer id, @NotNull LocalDate date, @NotNull Restaurant restaurant) {
         super(id);
         this.date = date;
         this.restaurant = restaurant;
-        setMeals(meals);
-        setVotes(votes);
-    }
-
-    public void setMeals(Collection<Meal> meals) {
-        this.meals = CollectionUtils.isEmpty(meals) ? Collections.EMPTY_LIST : List.copyOf(meals);
-    }
-
-    public void setVotes(Collection<Vote> votes) {
-        this.votes = CollectionUtils.isEmpty(votes) ? Collections.EMPTY_LIST :  List.copyOf(votes);
     }
 
     public void setDate(LocalDate date) {
