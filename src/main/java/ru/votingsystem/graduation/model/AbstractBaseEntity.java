@@ -10,6 +10,7 @@ public abstract class AbstractBaseEntity implements Persistable<Integer> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     protected Integer id;
 
     public AbstractBaseEntity() {
