@@ -19,6 +19,8 @@
 
         <spring.version>5.1.7.RELEASE</spring.version>
         <spring-data-jpa.version>2.1.9.RELEASE</spring-data-jpa.version>
+
+        <h2.version>1.4.199</h2.version>
     </properties>
 
     <build>
@@ -74,6 +76,12 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
         </dependency>
     </dependencies>
 
