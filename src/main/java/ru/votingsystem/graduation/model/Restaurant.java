@@ -10,7 +10,6 @@ public class Restaurant extends AbstractNamedEntity {
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "restaurant_city", joinColumns = @JoinColumn(name = "restaurant_id"))
     @Column(name = "city", nullable = false)
-    @ElementCollection(fetch = FetchType.EAGER)
     private City city;
 
     @OneToMany(mappedBy = "restaurant")

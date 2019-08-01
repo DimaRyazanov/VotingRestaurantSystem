@@ -11,7 +11,7 @@ import ru.votingsystem.graduation.util.ValidationUtil;
 @RestController
 @RequestMapping(ProfileRestController.REST_URL)
 public class ProfileRestController {
-    static final String REST_URL = "rest/profile";
+    static final String REST_URL = "/rest/profile";
 
     private UserService userService;
 
@@ -19,7 +19,7 @@ public class ProfileRestController {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public User get() {
         return userService.get(SecurityUtil.authUserId());
     }
