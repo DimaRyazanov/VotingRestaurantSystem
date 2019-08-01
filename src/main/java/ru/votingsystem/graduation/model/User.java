@@ -1,6 +1,5 @@
 package ru.votingsystem.graduation.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
@@ -47,8 +46,8 @@ public class User extends AbstractNamedEntity {
         this(u.id, u.name, u.email, u.password, u.enabled, u.registered, u.roles);
     }
 
-    public User(Integer id, String name, @Email @NotBlank @Size(max = 100) String email, @NotBlank @Size(min = 5, max = 100) String password, boolean enabled, @NotNull Date registered, Role role, Role... roles) {
-        this(id, name, email, password, enabled, registered, EnumSet.of(role, roles));
+    public User(Integer id, String name, @Email @NotBlank @Size(max = 100) String email, @NotBlank @Size(min = 5, max = 100) String password, Role role, Role... roles) {
+        this(id, name, email, password, true, new Date(), EnumSet.of(role, roles));
     }
 
     public User(Integer id, String name, @Email @NotBlank @Size(max = 100) String email, @NotBlank @Size(min = 5, max = 100) String password, boolean enabled, @NotNull Date registered, Set<Role> roles) {
@@ -112,7 +111,6 @@ public class User extends AbstractNamedEntity {
                 ", enabled=" + enabled +
                 ", registered=" + registered +
                 ", roles=" + roles +
-                ", votes=" + votes +
                 ", name='" + name + '\'' +
                 ", id=" + id +
                 '}';

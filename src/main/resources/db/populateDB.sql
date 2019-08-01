@@ -1,5 +1,6 @@
 DELETE FROM user_roles;
 DELETE FROM users;
+ALTER TABLE users ALTER COLUMN id RESTART WITH 1;
 
 INSERT INTO users (name, email, password) VALUES
 ('User', 'user@gmail.com', 'password'),

@@ -1,5 +1,6 @@
 package ru.votingsystem.graduation.repository;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import ru.votingsystem.graduation.model.User;
 
@@ -36,6 +37,6 @@ public class DataJpaUserRepository implements UserRepository {
 
     @Override
     public List<User> getAll() {
-        return userRepository.findAll();
+        return userRepository.findAll(new Sort(Sort.Direction.ASC, "name", "email"));
     }
 }
