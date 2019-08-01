@@ -1,5 +1,6 @@
 package ru.votingsystem.graduation.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
