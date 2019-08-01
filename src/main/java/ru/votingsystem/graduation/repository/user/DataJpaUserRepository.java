@@ -1,4 +1,4 @@
-package ru.votingsystem.graduation.repository;
+package ru.votingsystem.graduation.repository.user;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;

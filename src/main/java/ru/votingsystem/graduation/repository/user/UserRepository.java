@@ -1,4 +1,4 @@
-package ru.votingsystem.graduation.repository;
+package ru.votingsystem.graduation.repository.user;
 
 import ru.votingsystem.graduation.model.User;
 

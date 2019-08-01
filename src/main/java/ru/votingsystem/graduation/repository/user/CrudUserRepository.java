@@ -1,4 +1,4 @@
-package ru.votingsystem.graduation.repository;
+package ru.votingsystem.graduation.repository.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

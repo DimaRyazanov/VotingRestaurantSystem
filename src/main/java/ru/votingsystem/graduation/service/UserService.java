@@ -3,7 +3,7 @@ package ru.votingsystem.graduation.service;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.votingsystem.graduation.model.User;
-import ru.votingsystem.graduation.repository.UserRepository;
+import ru.votingsystem.graduation.repository.user.UserRepository;
 import ru.votingsystem.graduation.util.ValidationUtil;
 
 import java.util.List;
