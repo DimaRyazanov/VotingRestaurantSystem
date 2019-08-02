@@ -53,4 +53,14 @@ public class Meal extends AbstractNamedEntity {
     public Menu getMenu() {
         return menu;
     }
+
+    @Override
+    public String toString() {
+        return "Meal{" +
+                "price=" + price +
+                ", menu=" + menu +
+                ", name='" + name + '\'' +
+                ", id=" + id +
+                '}';
+    }
 }

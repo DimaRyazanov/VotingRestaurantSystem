@@ -25,10 +25,6 @@ public class Menu extends AbstractBaseEntity {
     @OneToMany(mappedBy = "menu")
     private List<Meal> meals;
 
-    @OneToMany(mappedBy = "menu")
-    @OrderBy("rate DESC")
-    private List<Vote> votes;
-
     public Menu() {
     }
 
@@ -66,17 +62,12 @@ public class Menu extends AbstractBaseEntity {
         return meals;
     }
 
-    public List<Vote> getVotes() {
-        return votes;
-    }
-
     @Override
     public String toString() {
         return "Menu{" +
                 "date=" + date +
                 ", restaurant=" + restaurant +
                 ", meals=" + meals +
-                ", votes=" + votes +
                 ", id=" + id +
                 '}';
     }

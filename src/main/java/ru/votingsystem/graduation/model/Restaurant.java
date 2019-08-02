@@ -16,6 +16,10 @@ public class Restaurant extends AbstractNamedEntity {
     @OrderBy("date DESC")
     private List<Menu> menus;
 
+    @OneToMany(mappedBy = "menu")
+    @OrderBy("rate DESC")
+    private List<Vote> votes;
+
     public Restaurant() {
     }
 
@@ -49,6 +53,7 @@ public class Restaurant extends AbstractNamedEntity {
         return "Restaurant{" +
                 "city=" + city +
                 ", menus=" + menus +
+                ", votes=" + votes +
                 ", name='" + name + '\'' +
                 ", id=" + id +
                 '}';
