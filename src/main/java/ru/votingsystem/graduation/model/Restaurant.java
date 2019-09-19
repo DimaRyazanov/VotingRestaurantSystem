@@ -1,61 +1,48 @@
 package ru.votingsystem.graduation.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+import javax.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name = "restaurants", uniqueConstraints = {@UniqueConstraint(columnNames = "name", name = "restaurants_unique_name_idx")})
+@Table(name = "restaurants")
 public class Restaurant extends AbstractNamedEntity {
-
-    @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "restaurant_city", joinColumns = @JoinColumn(name = "restaurant_id"))
-    @Column(name = "city", nullable = false)
-    private City city;
-
-    @OneToMany(mappedBy = "restaurant")
-    @OrderBy("date DESC")
+    @OneToMany
+    @OrderBy("dateMenu desc")
     private List<Menu> menus;
 
-    @OneToMany(mappedBy = "menu")
-    @OrderBy("rate DESC")
+    @OneToMany
+    @OrderBy("dateVote desc")
     private List<Vote> votes;
 
     public Restaurant() {
     }
 
-    public Restaurant(Restaurant r) {
-        this(r.id, r.name, r.city);
+    public Restaurant(String name) {
+        super(name);
     }
 
-    public Restaurant(String name, City city) {
-        this(null, name, city);
-    }
-
-    public Restaurant(Integer id, String name, City city) {
+    public Restaurant(Integer id, String name, List<Menu> menus, List<Vote> votes) {
         super(id, name);
-        this.city = city;
-    }
-
-    public City getCity() {
-        return city;
+        this.menus = menus;
+        this.votes = votes;
     }
 
     public List<Menu> getMenus() {
         return menus;
     }
 
-    public void setCity(City city) {
-        this.city = city;
+    public void setMenus(List<Menu> menus) {
+        this.menus = menus;
     }
 
-    @Override
-    public String toString() {
-        return "Restaurant{" +
-                "city=" + city +
-                ", menus=" + menus +
-                ", votes=" + votes +
-                ", name='" + name + '\'' +
-                ", id=" + id +
-                '}';
+    public List<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(List<Vote> votes) {
+        this.votes = votes;
     }
 }

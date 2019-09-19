@@ -32,6 +32,12 @@ public class ValidationUtil {
         }
     }
 
+    public static void checkNotNew(AbstractBaseEntity entity) {
+        if (entity.isNew()) {
+            throw new IllegalArgumentException(entity + " must be not new (id != null)");
+        }
+    }
+
     public static void assureIdConsistent(AbstractBaseEntity entity, int id) {
         if (entity.isNew()) {
             entity.setId(id);

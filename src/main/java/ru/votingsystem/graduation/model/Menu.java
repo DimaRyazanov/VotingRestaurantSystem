@@ -9,12 +9,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "menus", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_id", "date"}, name = "menus_unique_restaurant_date_idx")})
+@Table(name = "menus", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"restaurant_id", "date_menu"}, name = "menus_unique_date_menu_restaurant_idx")})
 public class Menu extends AbstractBaseEntity {
-
-    @Column(name = "date", nullable = false, columnDefinition = "timestamp default now()")
+    @Column(name = "date_menu", nullable = false)
     @NotNull
-    private LocalDate date;
+    private LocalDate dateMenu;
 
     @ManyToOne
     @JoinColumn(name = "restaurant_id", nullable = false)
@@ -22,53 +22,53 @@ public class Menu extends AbstractBaseEntity {
     @NotNull
     private Restaurant restaurant;
 
-    @OneToMany(mappedBy = "menu")
-    private List<Meal> meals;
+    @CollectionTable(name = "menu_dishes", joinColumns = @JoinColumn(name = "menu_id"))
+    @Column(name = "dish")
+    @ElementCollection
+    private List<String> dishes;
 
     public Menu() {
     }
 
-    public Menu(Menu m) {
-        this(m.id, m.date, m.restaurant);
+    public Menu(@NotNull LocalDate dateMenu, @NotNull Restaurant restaurant) {
+        this.dateMenu = dateMenu;
+        this.restaurant = restaurant;
     }
 
-    public Menu(@NotNull LocalDate date, @NotNull Restaurant restaurant) {
-        this(null, date, restaurant);
+    public Menu(@NotNull LocalDate dateMenu, @NotNull Restaurant restaurant, List<String> dishes) {
+        this.dateMenu = dateMenu;
+        this.restaurant = restaurant;
+        this.dishes = dishes;
     }
 
-    public Menu(Integer id, @NotNull LocalDate date, @NotNull Restaurant restaurant) {
+    public Menu(Integer id, @NotNull LocalDate dateMenu, @NotNull Restaurant restaurant, List<String> dishes) {
         super(id);
-        this.date = date;
+        this.dateMenu = dateMenu;
         this.restaurant = restaurant;
+        this.dishes = dishes;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public LocalDate getDateMenu() {
+        return dateMenu;
     }
 
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
-
-    public LocalDate getDate() {
-        return date;
+    public void setDateMenu(LocalDate dateMenu) {
+        this.dateMenu = dateMenu;
     }
 
     public Restaurant getRestaurant() {
         return restaurant;
     }
 
-    public List<Meal> getMeals() {
-        return meals;
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 
-    @Override
-    public String toString() {
-        return "Menu{" +
-                "date=" + date +
-                ", restaurant=" + restaurant +
-                ", meals=" + meals +
-                ", id=" + id +
-                '}';
+    public List<String> getDishes() {
+        return dishes;
+    }
+
+    public void setDishes(List<String> dishes) {
+        this.dishes = dishes;
     }
 }
